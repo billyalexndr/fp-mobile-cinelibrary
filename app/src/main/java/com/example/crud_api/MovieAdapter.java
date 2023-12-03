@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,18 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
     List<MovieItem> result;
     Activity activity;
+
+    private OnBookmarkClickListener onBookmarkClickListener;
+
+    // Interface untuk menangani klik tombol bookmark
+    public interface OnBookmarkClickListener {
+        void onBookmarkClick(int position);
+    }
+
+    // Method untuk mengatur listener klik bookmark
+    public void setOnBookmarkClickListener(OnBookmarkClickListener listener) {
+        this.onBookmarkClickListener = listener;
+    }
 
     public MovieAdapter(List<MovieItem> result, Activity activity) {
         this.result = result;
@@ -47,6 +60,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         TextView tv_title, tv_released, tv_runtime, tv_genre, tv_country, tv_imdbrating;
         ImageView imageView;
 
+        // Bookmark Button
+        Button btnBookmark;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_title = itemView.findViewById(R.id.tv_title);
@@ -56,6 +72,30 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             tv_country = itemView.findViewById(R.id.tv_country);
             tv_imdbrating = itemView.findViewById(R.id.tv_imdbrating);
             imageView = itemView.findViewById(R.id.imageView);
+
+            // Temukan tombol bookmark
+            btnBookmark = itemView.findViewById(R.id.btnBookmark);
+
+            // Set click listener untuk tombol bookmark
+            btnBookmark.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION && onBookmarkClickListener != null) {
+                    onBookmarkClickListener.onBookmarkClick(position);
+                }
+            });
+        }
+
+        // Metode untuk mengatur tampilan bookmark pada ViewHolder
+        public void setBookmark(boolean isBookmarked) {
+            if (isBookmarked) {
+                btnBookmark.setText("Bookmarked");
+                // Ubah warna latar belakang atau tampilan lainnya untuk menandakan sudah di-bookmark
+                btnBookmark.setBackgroundResource(R.drawable.bookmark_button_bg); // Ubah sesuai kebutuhan
+            } else {
+                btnBookmark.setText("Bookmark");
+                // Ubah warna latar belakang atau tampilan lainnya untuk menandakan belum di-bookmark
+                btnBookmark.setBackgroundResource(R.drawable.unbookmark_button_bg); // Ubah sesuai kebutuhan
+            }
         }
 
         public void bind(MovieItem movieItem) {

@@ -61,5 +61,18 @@
             android:id="@+id/tv_imdbrating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnBookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="?android:selectableItemBackground"
+            android:text="Add to Library"
+            android:textColor="@android:color/black"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:contentDescription="Add to Library" />
+            <!-- android:drawableStart="@drawable/ic_bookmark_outline" -->
     </LinearLayout>
 </LinearLayout>

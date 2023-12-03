@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -30,6 +31,18 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MovieAdapter(myMovie);
         rv_movie.setAdapter(adapter);
         getDataPlayer();
+    }
+
+    // Function to handle bookmark action
+    private void handleBookmarkAction(MovieItem movieItem) {
+        // Implement logic to handle bookmarking a movie and saving it locally
+        BookmarkManager.saveBookmark(this, movieItem);
+    }
+
+    // Function to navigate to the bookmarked movies page
+    private void navigateToBookmarkedMovies() {
+        Intent intent = new Intent(MainActivity.this, BookmarkedMoviesActivity.class);
+        startActivity(intent);
     }
 
     public void getDataPlayer(){
