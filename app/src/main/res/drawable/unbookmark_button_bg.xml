@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Contoh file XML untuk tombol yang belum di-bookmark -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- State saat tombol di-klik atau di-tap -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <!-- Background saat tombol di-klik -->
+            <solid android:color="#2196F3" /> <!-- Ganti dengan warna untuk tombol di-klik saat belum di-bookmark -->
+            <!-- Tambahkan corner radius atau styling lainnya jika diinginkan -->
+        </shape>
+    </item>
+    <!-- State normal -->
+    <item>
+        <shape android:shape="rectangle">
+            <!-- Background saat tombol dalam keadaan normal -->
+            <solid android:color="#03A9F4" /> <!-- Ganti dengan warna untuk tombol normal saat belum di-bookmark -->
+            <!-- Tambahkan corner radius atau styling lainnya jika diinginkan -->
+        </shape>
+    </item>
+</selector>
