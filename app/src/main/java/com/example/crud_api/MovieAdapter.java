@@ -1,6 +1,7 @@
 package com.example.crud_api;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +17,15 @@ import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
     List<MovieItem> result;
-    Activity activity;
+    private Context context;
 
-    public MovieAdapter(List<MovieItem> result, Activity activity) {
+    public MovieAdapter(List<MovieItem> result, Context context) {
         this.result = result;
-        this.activity = activity;
+        this.context = context;
     }
 
-    public MovieAdapter(MyMovie myMovie) {
+    public MovieAdapter(Context context) {
+        this.context = context;
     }
 
     @NonNull
@@ -36,6 +38,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int
             title) {
         holder.bind(result.get(title));
+    }
+    public void setData(List<MovieItem> newData) {
+        result = newData;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -65,7 +71,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             tv_genre.setText(movieItem.Genre);
             tv_country.setText(movieItem.Country);
             tv_imdbrating.setText(movieItem.imdbRating);
-            Glide.with(activity).load(movieItem.getImages()).into(imageView);
+            Glide.with(context).load(movieItem.getImages()).into(imageView);
         }
     }
 }

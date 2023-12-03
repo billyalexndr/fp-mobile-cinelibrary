@@ -6,4 +6,7 @@
     </style>
 
     <style name="Theme.CRUD_API" parent="Base.Theme.CRUD_API" />
+    <style name="MyButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@android:color/white</item>
+    </style>
 </resources>
