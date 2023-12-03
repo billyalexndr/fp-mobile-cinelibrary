@@ -1,6 +1,9 @@
 package com.example.crud_api;
 
-public class MovieItem {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class MovieItem implements Parcelable {
     String Title;
     String Released;
     String Runtime;
@@ -8,6 +11,15 @@ public class MovieItem {
     String Country;
     String imdbRating;
     String Images[];
+
+    public MovieItem(String title, String released, String genre, String country, String imdbRating, String images) {
+        setTitle(title);
+        setReleased(released);
+        setGenre(genre);
+        setCountry(country);
+        setImdbRating(imdbRating);
+        setImages(images);
+    }
 
     public String getTitle() {
         return Title;
@@ -60,6 +72,57 @@ public class MovieItem {
     }
 
     public void setImages(String Image) {
-        Images[0] = Image;
+        Images = new String[]{Image};
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.Title);
+        dest.writeString(this.Released);
+        dest.writeString(this.Runtime);
+        dest.writeString(this.Genre);
+        dest.writeString(this.Country);
+        dest.writeString(this.imdbRating);
+        dest.writeStringArray(this.Images);
+    }
+
+    public void readFromParcel(Parcel source) {
+        this.Title = source.readString();
+        this.Released = source.readString();
+        this.Runtime = source.readString();
+        this.Genre = source.readString();
+        this.Country = source.readString();
+        this.imdbRating = source.readString();
+        this.Images = source.createStringArray();
+    }
+
+    public MovieItem() {
+    }
+
+    protected MovieItem(Parcel in) {
+        this.Title = in.readString();
+        this.Released = in.readString();
+        this.Runtime = in.readString();
+        this.Genre = in.readString();
+        this.Country = in.readString();
+        this.imdbRating = in.readString();
+        this.Images = in.createStringArray();
+    }
+
+    public static final Parcelable.Creator<MovieItem> CREATOR = new Parcelable.Creator<MovieItem>() {
+        @Override
+        public MovieItem createFromParcel(Parcel source) {
+            return new MovieItem(source);
+        }
+
+        @Override
+        public MovieItem[] newArray(int size) {
+            return new MovieItem[size];
+        }
+    };
 }
