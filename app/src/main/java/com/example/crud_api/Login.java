@@ -53,6 +53,8 @@ public class Login extends AppCompatActivity {
                 if(isValid){
                     Intent intent_masuk = new Intent(Login.this, MainActivityNav.class);
                     startActivity(intent_masuk);
+                    AppPreferences appPreferences = new AppPreferences(Login.this);
+                    appPreferences.setCurrentAccountId(usn.getText().toString());
                 }
                 else{
                     Toast.makeText(this,"Password/Username salah",Toast.LENGTH_LONG).show();

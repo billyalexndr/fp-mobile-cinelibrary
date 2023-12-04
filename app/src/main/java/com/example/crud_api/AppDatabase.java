@@ -1,5 +1,6 @@
 package com.example.crud_api;
 
+
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
@@ -112,6 +113,38 @@ public class AppDatabase extends SQLiteOpenHelper {
         db.close();
 
         return movies;
+    }
+
+    public AccountModel getAccountByUsername(String username) {
+        AccountModel account = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_ACCOUNTS,
+                new String[]{COLUMN_USERNAME, COLUMN_PASSWORD, COLUMN_EMAIL, COLUMN_NAME},
+                COLUMN_USERNAME + "=?",
+                new String[]{username},
+                null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int usernameIndex = cursor.getColumnIndex(COLUMN_USERNAME);
+            int passwordIndex = cursor.getColumnIndex(COLUMN_PASSWORD);
+            int emailIndex = cursor.getColumnIndex(COLUMN_EMAIL);
+            int nameIndex = cursor.getColumnIndex(COLUMN_NAME);
+
+            if (usernameIndex >= 0 && passwordIndex >= 0 && emailIndex >= 0 && nameIndex >= 0) {
+                account = new AccountModel();
+
+                account.setUsername(cursor.getString(usernameIndex));
+                account.setPassword(cursor.getString(passwordIndex));
+                account.setEmail(cursor.getString(emailIndex));
+                account.setFullname(cursor.getString(nameIndex));
+            }
+        }
+
+        cursor.close();
+        db.close();
+
+        return account;
     }
 
     @Override
