@@ -38,17 +38,6 @@ public class MainActivityNav extends AppCompatActivity {
             }
         });
 
-        ImageButton btnSearch = findViewById(R.id.btnSearch);
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SearchFragment searchFragment = new SearchFragment();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragmentContainerView, searchFragment);
-                transaction.addToBackStack(null); // Allow going back
-                transaction.commit();
-            }
-        });
 
         ImageButton btnLibrary = findViewById(R.id.btnLibrary);
         btnLibrary.setOnClickListener(new View.OnClickListener() {

@@ -3,7 +3,8 @@
     android:id="@+id/drawer_layout"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/darkblack">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
@@ -24,25 +25,17 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/home"
+            android:src="@drawable/home_1"
             android:background="@android:color/transparent"
             android:onClick="onButtonClick" />
 
-        <ImageButton
-            android:id="@+id/btnSearch"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/search"
-            android:background="@android:color/transparent"
-            android:onClick="onButtonClick" />
 
         <ImageButton
             android:id="@+id/btnLibrary"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/bookmark"
+            android:src="@drawable/baseline_collections_bookmark_24"
             android:background="@android:color/transparent"
             android:onClick="onButtonClick" />
 
@@ -51,7 +44,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/account"
+            android:src="@drawable/acc"
             android:background="@android:color/transparent"
             android:onClick="onButtonClick" />
 
